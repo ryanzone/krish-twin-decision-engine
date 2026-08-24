@@ -96,7 +96,9 @@ def run_weather_engine(
     mean_ndvi = fetch_sentinel2_ndvi(lat, lon)
 
     # 2. Fetch live market commodity prices from data.gov.in
-    gov_api_key = os.getenv("GOV_DATA_API_KEY", "579b464db66ec23bdd00000189f6010f7130475144476e317b37f1d9")
+    gov_api_key = os.getenv("GOV_DATA_API_KEY")
+    if not gov_api_key:
+        print("Market Warning: GOV_DATA_API_KEY is not set in environment/.env file.", flush=True)
     gov_url = "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070"
     gov_params = {
         "api-key": gov_api_key,
